@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+
+using namespace std;
+
+//провряем, есть ли совпадение
+bool check(const string& inp, const string& pat){
+	stringstream ss;
+	ss << inp;
+	string str;
+	//проходим по каждому слову
+	while(ss >> str){
+		 //ищем слово
+		 if(str == pat){
+			return true;
+		 }
+	}
+	return false;
+}
+int main(){
+	setlocale(LC_ALL, "");
+	ifstream in("input.txt");
+	string line;//предложение
+	stringstream ss;//строковый поток
+	string pat;
+	cout << "Введие слово для поиска: ";
+	cin >> pat;
+	while(getline(in, line)){//считываем по предложению
+			//если строка содержит искомое слово
+			if(check(line, pat)){
+				ss << line << '\n';
+			}
+	}
+	cout << ss.str();
+	in.close();//закрываем файл			
+	
+	system("pause>>void");
+
+}
